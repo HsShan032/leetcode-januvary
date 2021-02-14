@@ -1,0 +1,35 @@
+class Solution {
+public:
+    bool isValid(string str) {
+        if(str.size()==1)
+            return false;
+        stack<char> s;
+        vector<char> c =  {'{','[','('};
+        for(auto i:str){
+            if(find(c.begin(),c.end(),i)!=c.end())
+                s.push(i);
+            else if(i=='}')
+                {
+                    if(s.empty() || s.top()!='{')
+                        return false;
+                    if(s.top()=='{')
+                        s.pop();
+                }
+            else if(i==']')
+                {
+                if(s.empty() || s.top()!='[')
+                        return false;
+                    if(s.top()=='[')
+                        s.pop();
+                }
+            else if(i==')')
+                {
+                if(s.empty() || s.top()!='(')
+                        return false;
+                    if(s.top()=='(')
+                        s.pop();
+                }
+        }
+        return s.empty();
+    }
+};
