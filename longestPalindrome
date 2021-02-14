@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        string lps = "";
+        int n = s.size();
+        for(int i=0;i<n;i++){
+            string odd = expandpalindrome(s,i,i);
+            string even = expandpalindrome(s,i,i+1);
+            if(lps.size() < odd.size())
+                lps = odd;
+            if(lps.size() < even.size())
+                lps = even;
+        }
+        return lps;
+    }
+    string expandpalindrome(string s,int l,int r){
+        while(l>=0 && r<s.size() && s[l] == s[r]){
+            l--;
+            r++;
+        }
+        return s.substr(l+1,r-1);
+    }
+};
