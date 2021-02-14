@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int minOperations(vector<int>& nums, int x) {
+        int n = nums.size();
+        int sum = 0,left = 0,res = -1;
+        int target = -x;
+        for(auto i:nums) target += i;
+        if(target == 0) return n;
+        if(target < 0) return -1;
+        for(int i=0;i<n;i++){
+            sum += nums[i];
+            while(sum > target){
+                sum -= nums[left++];
+            }
+            if(sum == target){
+                res = max(res,i-left+1);
+            }
+        }
+        return res == -1? -1: n - res;
+    }
+};
