@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int minimumEffortPath(vector<vector<int>>& heights) {
+        int l = 0, r= 1000001;
+        while(l < r){
+            int limit = (l+r)/2;
+            if(isgood(heights,limit)){
+                r = limit;
+            }
+            else{
+                l = limit + 1;
+            }
+        }
+        return l;
+    }
+    bool isgood(vector<vector<int>> heights,int limit){
+        int r = heights.size();
+        int c = heights[0].size();
+        queue<vector<int>> q;
+        q.push({0,0});
+        bool vis[r][c];
+        memset(vis,false,sizeof(vis));
+        vector<vector<int>> dir = {{1,0},{0,1},{-1,0},{0,-1}};
+        while(q.size() > 0){
+            int x = q.front()[0];
+            int y = q.front()[1];
+            q.pop();
+            if(x==r-1 && y==c-1) return true;
+            for(auto d:dir){
+                int nx = x + d[0];
+                int ny = y + d[1];
+                if(nx >= 0 && ny >= 0 && nx < r && ny < c && !vis[nx][ny]){
+                    if(abs(heights[x][y] - heights[nx][ny]) <= limit ){
+                        q.push({nx,ny});
+                        vis[nx][ny] = true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+};
