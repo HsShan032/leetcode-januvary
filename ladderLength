@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+        set<string> lis;
+        queue<string> que;
+        set<string> vis;
+        for(auto i:wordList)
+            lis.insert(i);
+        que.push(beginWord);
+        vis.insert(beginWord);
+        int level = 0;
+        while(!que.empty()){
+            for(int size=que.size();size>0;size--){
+                string word = que.front();
+                que.pop();
+                if(word.compare(endWord)==0)
+                    return level + 1;
+                for(int i=0;i<word.size();i++){
+                    char backup = word[i];
+                    for(char c='a';c<='z';c++){
+                        word[i] = c;
+                        string nextWord = word;
+                        if(vis.find(nextWord)==vis.end() && lis.find(nextWord)!=lis.end()){
+                            que.push(nextWord);
+                            vis.insert(nextWord);
+                        }
+                    }
+                    word[i] = backup;
+                }
+            }
+        level++;
+        }
+        return 0;
+    }
+};
