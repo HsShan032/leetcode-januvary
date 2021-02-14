@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool kLengthApart(vector<int>& nums, int k) {
+            vector<int> s;
+            for(int i=0;i<nums.size();i++){
+                if(nums[i]==0)
+                    continue;
+                else if(nums[i]==1)
+                    s.push_back(i+1);
+            }
+            for(auto i:s)
+                cout<<i<<" ";
+            for(int i=0;i<s.size()-1;i++)
+                 if(abs(s[i] - s[i+1]) == k)
+                    continue;
+                 else if(abs(s[i] - s[i+1]) < k)
+                    return false;
+                
+            return true;
+        }
+    };
