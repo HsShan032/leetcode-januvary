@@ -1,0 +1,14 @@
+class Solution:
+    def getSmallestString(self, n: int, k: int) -> str:
+        l = ['a'] * n
+        #print(l)
+        k -= n
+        while k > 0:
+            n -= 1
+            l[n] = chr(min(k,25) + 97)
+            #print(l[n])
+            k -= min(k,25)
+        #print(l)
+        return ''.join(l)
+        
+            
