@@ -1,0 +1,13 @@
+class Solution {
+public:
+    bool canFormArray(vector<int>& arr, vector<vector<int>>& pieces) {
+        map<int, vector<int>> m;
+        vector<int> result;
+        for(auto a:pieces)
+            m[a[0]] = a;
+        for(auto i:arr)
+            for(int x:m[i])
+                result.push_back(x);
+        return arr==result;
+    }
+};
